@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop-watch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <center>
+        <h2 id="tittle">Stop-watch App</h2>
+    <div class="stopwatch">
+        <h1 id="displaytime">00:00:00</h1>
+        <div class="buttons">
+            <button onclick="pausewatch()">Pause</button>
+            <button onclick="startwatch()">Start</button>
+            <button onclick="stop()">Stop</button>
+        </div>
+    </div>
+</center>
+<script>
+    let[seconds,miniutes,hours]=[0,0,0];
+    let display=document.querySelector("#displaytime");
+    let timer=null;
+    function stopwatch(){
+        seconds++;
+        if(seconds==60){
+            seconds=0
+            miniutes++;
+            if(miniutes==60){
+                miniutes=0;
+                hours++;
+            }
+        }
+        let h=hours<10 ?"0"+hours :hours;
+        let m=miniutes<10 ?"0"+miniutes :miniutes;
+        let s=seconds<10 ?"0"+seconds :seconds;
+        display.innerHTML= h+":"+m+":"+s
+    
+    }
+    function startwatch(){
+        if(timer!==null){
+            clearInterval(timer);
+        }
+         timer=setInterval(stopwatch,1000);
+    }
+    function pausewatch(){
+        clearInterval(timer);
+    }
+    function stop(){
+        clearInterval(timer);
+       [seconds,miniutes,hours]=[0,0,0];
+       display.innerHTML="00:00:00";
+        
+    }
+</script>
+    
+</body>
+</html>
